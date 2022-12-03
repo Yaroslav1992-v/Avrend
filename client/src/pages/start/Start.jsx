@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../common/logo";
 
 import Slider from "./components/slider";
-const Main = () => {
+const Start = () => {
   const slider = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore",
     "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
@@ -11,13 +11,13 @@ const Main = () => {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doei",
   ];
   return (
-    <section className="main">
+    <section className="startPage">
       <div className="container">
-        <div className="main__container">
-          <div className="main__box">
+        <div className="startPage__container">
+          <div className="startPage__box">
             <Logo size={true} />
             <Slider slider={slider} />
-            <Link className="main__link btn" to="/login">
+            <Link className="startPage__link btn" to="/login">
               Get Started
             </Link>
           </div>
@@ -27,4 +27,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Start;

@@ -15,18 +15,19 @@ const Slider = ({ slider }) => {
   // }, [slide]);
 
   return (
-    <div className="main__slider">
-      <div className="main__textBox">
+    <div className="startPage__slider">
+      <div className="startPage__textBox">
         <p>{slider[slide]}</p>
       </div>
-      <ul className="main__dots">
+      <ul className="startPage__dots">
         {slider.map((dot, index) => (
-          <li className="main__dots-item" key={index}>
+          <li className="startPage__dots-item" key={index}>
             <button
               type="button"
               onClick={() => handleSlide(index)}
               className={
-                "main__dot" + (slide === index ? " main__dot-active" : "")
+                "startPage__dot" +
+                (slide === index ? " startPage__dot-active" : "")
               }
             ></button>
           </li>

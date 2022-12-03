@@ -14,8 +14,8 @@ export const registerValidator = {
   accountName: {
     isRequired: { message: "Name is Required For Registration " },
     min: {
-      message: "Name must contain  at least 3 symbols",
-      value: 3,
+      message: "Name must contain  at least 5 symbols",
+      value: 5,
     },
   },
 

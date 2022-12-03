@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../common/logo";
-import LoginForm from "../main/components/ui/loginForm";
-import RegisterForm from "../main/components/ui/registerForm";
+import LoginForm from "../../common/ui/loginForm";
+import RegisterForm from "../../common/ui/registerForm";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 const Login = () => {
   const [type, setType] = useState("login");

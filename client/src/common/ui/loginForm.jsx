@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import TextField from "../../../../common/form/textField";
-import RadioField from "../../../../common/form/radiField";
-import { validator } from "../../../../utils/validator";
-import { loginValidator } from "../../../../utils/validatorsConfig";
+import TextField from "../form/textField";
+import RadioField from "../form/radiField";
+import { validator } from "../../utils/validator";
+import { loginValidator } from "../../utils/validatorsConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuthError, signIn } from "../../store/user";
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     remember: "",
   });
+  const backEndError = useSelector(getAuthError());
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const validate = () => {
     const errors = validator(user, loginValidator);
@@ -20,9 +26,16 @@ const LoginForm = () => {
       [target.name]: target.value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     validate();
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+    const login = await dispatch(signIn(user));
+    if (login) {
+      navigate("/");
+    }
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -42,6 +55,7 @@ const LoginForm = () => {
         type="password"
         error={errors.password}
       />
+      {backEndError && <p className="form_error">{backEndError}</p>}
       <RadioField name="remember" onChange={handleChange} />
       <button className="form__submit btn">Sign In</button>
     </form>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import RadioField from "../../../../common/form/radiField";
-import TextField from "../../../../common/form/textField";
-import { validator } from "../../../../utils/validator";
-import { registerValidator } from "../../../../utils/validatorsConfig";
+import RadioField from "../form/radiField";
+import TextField from "../form/textField";
+import { validator } from "../../utils/validator";
+import { registerValidator } from "../../utils/validatorsConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuthError, signUp } from "../../store/user";
+import { useNavigate } from "react-router-dom";
 const RegisterForm = () => {
   const [user, setUser] = useState({
     email: "",
@@ -10,6 +13,9 @@ const RegisterForm = () => {
     password: "",
     remember: "",
   });
+  const backEndError = useSelector(getAuthError());
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const validate = () => {
     const errors = validator(user, registerValidator);
@@ -21,9 +27,16 @@ const RegisterForm = () => {
       [target.name]: target.value,
     }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     validate();
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+    const register = await dispatch(signUp(user));
+    if (register) {
+      navigate("/");
+    }
   };
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -52,6 +65,7 @@ const RegisterForm = () => {
         error={errors.password}
       />
       <RadioField name="remember" onChange={handleChange} />
+      {backEndError && <p className="form_error">{backEndError}</p>}
       <button className="form__submit btn">Register</button>
     </form>
   );
