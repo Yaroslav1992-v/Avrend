@@ -1,0 +1,145 @@
+.login {
+  &__container {
+    max-width: 375px;
+    background: $background;
+    padding-top: 45px;
+    width: 100%;
+    display: inline-block;
+    flex-direction: column;
+  }
+  &__box {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    background-color: $white;
+    z-index: 999;
+    max-width: 375px;
+    padding: 30px 25px;
+  }
+  &__title {
+    font-weight: 800;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  &__text {
+    color: $grey-500;
+    margin-bottom: 30px;
+  }
+
+  &__forgot {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  &__question {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  &__reset {
+    color: $orange;
+    font-size: 14px;
+    transition: color 0.5s ease;
+    &:hover {
+      color: $red;
+    }
+  }
+  &__signUp {
+    max-width: 320px;
+    width: 100%;
+    border: 1px solid $orange;
+    justify-content: center;
+    color: $grey-300;
+    cursor: pointer;
+    &:hover {
+      border-color: $red;
+      color: $red;
+    }
+    &:focus {
+      border-color: $black;
+      color: $black;
+    }
+  }
+  &__back {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    @include center;
+    cursor: pointer;
+    margin: 0 auto;
+    border: 1px solid transparent;
+    transition: all ease 0.5s;
+    &:hover {
+      padding-right: 10px;
+    }
+    &:focus {
+      border-color: $orange;
+    }
+  }
+}
+
+.form {
+  &__inputBox {
+    position: relative;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+  &__input {
+    width: 100%;
+    border: none;
+    padding: 0 5px 15px;
+    border-bottom: 1px solid rgba(199, 199, 199, 0.24);
+    padding-left: 5px;
+    transition: border-color ease 0.5s;
+    &:focus {
+      outline: transparent;
+      border-color: black;
+    }
+  }
+  &__btn {
+    position: absolute;
+    right: 0;
+    bottom: 15px;
+    background-color: transparent;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__radioBox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  &__radio {
+    height: 17px;
+    width: 17px;
+    background: transparent;
+    margin-right: 15px;
+
+    &[type="radio"] {
+      border: 2px solid $grey-500;
+    }
+  }
+  &__submit {
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+    background-color: $orange;
+    color: $white;
+    border: 1px solid transparent;
+    margin-bottom: 15px;
+    &:hover {
+      border-color: $grey-400;
+      color: $black;
+    }
+    &:focus {
+      border-color: $black;
+    }
+  }
+  &_error {
+    display: block;
+    color: $red;
+  }
+}

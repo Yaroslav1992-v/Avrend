@@ -1,0 +1,41 @@
+.logo {
+  max-width: 100%;
+  @include center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 155px;
+  margin-bottom: 30px;
+  &-small {
+    margin-top: 50px;
+  }
+  &__imageBox {
+    margin-bottom: 80px;
+    &-small {
+      height: 70px;
+      width: 60px;
+      margin-bottom: 5px;
+    }
+  }
+  &__info {
+    margin-bottom: 10px;
+  }
+  &__title {
+    font-size: 45px;
+    font-weight: 900;
+    color: $white;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    &-small {
+      font-size: 35px;
+      margin-bottom: 0;
+    }
+  }
+  &__text {
+    font-style: italic;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.53);
+    &-small {
+      font-size: 8px;
+    }
+  }
+}
