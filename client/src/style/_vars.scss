@@ -1,6 +1,7 @@
 $background: linear-gradient(180deg, #d3ab7c 0%, #596e79 100%);
 $background-100: #596e79;
 $white: #fff;
+$white-100: #f9f9f9;
 $black: #000;
 $black-100: #1f1f1f;
 $grey: #c4c4c4;
@@ -9,6 +10,8 @@ $grey-200: #b3bfc5;
 $grey-300: #838383;
 $grey-400: #596e79;
 $grey-500: #898a8d;
+$grey-600: #979797;
+$grey-700: #595959;
 $orange: #d3ab7c;
 $red: #f56f6f;
 @mixin center {
@@ -16,3 +19,5 @@ $red: #f56f6f;
   align-items: center;
   justify-content: center;
 }
+$size: "30px";
+$maxWidth: "375px";

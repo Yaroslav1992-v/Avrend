@@ -1,7 +1,10 @@
-@import "./reset.scss";
-@import "./global.scss";
-@import "./vars.scss";
-@import "./pages/start.scss";
-@import "./components/logo.scss";
-@import "./pages/login.scss";
-@import "./components/loader.scss";
+@import "./reset";
+@import "./vars";
+@import "./global";
+@import "./pages/start";
+@import "./components/logo";
+@import "./pages/login";
+@import "./components/loader";
+@import "./pages/home";
+@import "./components/navigation";
+@import "./pages/user";

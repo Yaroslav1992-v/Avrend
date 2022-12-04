@@ -26,11 +26,6 @@ dd {
   margin: 0;
 }
 
-ol[class],
-ul[class] {
-  padding: 0;
-}
-
 ul[class] {
   list-style: none;
 }
@@ -50,6 +45,7 @@ select {
 button {
   border-width: 0;
   padding: 0;
+  cursor: pointer;
 }
 a {
   text-decoration: none;

@@ -66,7 +66,7 @@ export const signUp = (payload) => async (dispatch) => {
 export const signIn = (payload) => async (dispatch) => {
   try {
     const data = await authService.login(payload);
-    localStorageService.setTokens({ ...data, userId: data.newUser._id });
+    localStorageService.setTokens(data);
     dispatch(authRequestSuccess({ userId: data.userId }));
     return true;
   } catch (error) {
@@ -85,6 +85,7 @@ export const loadUsersList = () => async (dispatch) => {
 };
 const { reducer: userReducer, actions } = userSlice;
 export const getAuthError = () => (state) => state.users.error;
+export const getCurrentUserId = () => (state) => state.users.auth.userId;
 export const getUsersLoadingStatus = () => (state) => state.users.dataLoaded;
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 const {

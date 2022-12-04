@@ -2,11 +2,13 @@
 body {
   font-family: "Mulish", sans-serif;
   font-weight: 400;
+  background-color: #e5e5e5;
 }
 .container {
   max-width: 375px;
   width: 100%;
   margin: 0 auto;
+  position: relative;
 }
 .btn {
   border-radius: 130px;
