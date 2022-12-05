@@ -1,0 +1,7 @@
+.edit {
+  &__container {
+    padding: calc(#{$size} * 3) 30px;
+    background-color: $white;
+    position: relative;
+  }
+}

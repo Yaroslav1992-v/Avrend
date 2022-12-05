@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import NavBar from "../../common/ui/navBar";
 import UserImage from "../../common/ui/userImage";
-import { getCurrentUserId } from "../../store/user";
+import { findUserById, getCurrentUserId } from "../../store/user";
 const Home = () => {
   const userId = useSelector(getCurrentUserId());
+  const user = useSelector(findUserById(userId));
   return (
     <section className="home">
       <div className="container">
@@ -13,9 +14,7 @@ const Home = () => {
             check={true}
             children={
               <UserImage
-                img={
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuS4q9gPpC3J0mYiARB4gNfrwx3QHNglobOpDduKih&s"
-                }
+                img={user.picturePath}
                 size={50}
                 link={`/users/${userId}`}
               />

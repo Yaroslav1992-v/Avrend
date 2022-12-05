@@ -32,9 +32,18 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    picturePath: String,
-    location: String,
-    occupation: String,
+    picturePath: {
+      type: String,
+      default: "",
+    },
+    location: {
+      type: String,
+      default: "",
+    },
+    occupation: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

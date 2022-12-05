@@ -72,6 +72,11 @@
       bottom: 7px;
     }
   }
+  &__return {
+    font-size: 25px;
+    background-color: transparent;
+    display: flex;
+  }
 }
 .menu {
   background-color: $background-100;

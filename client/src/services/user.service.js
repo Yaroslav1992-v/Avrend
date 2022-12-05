@@ -5,5 +5,12 @@ const userService = {
     const { data } = await httpService.get(apiEndPoint);
     return data;
   },
+  updateUser: async (content, userId) => {
+    const { data } = await httpService.patch(
+      `${apiEndPoint}${userId}`,
+      content
+    );
+    return data;
+  },
 };
 export default userService;

@@ -22,6 +22,7 @@ const TextField = ({
     <div className="form__inputBox">
       <label htmlFor={name}></label>
       <input
+        id={name}
         className="form__input"
         type={inputType ? type : "text"}
         name={name}

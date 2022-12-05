@@ -48,13 +48,18 @@ export const userSlice = createSlice({
       }
       state.entities.push(action.payload);
     },
+    userUpdated: (state, action) => {
+      const index = state.entities.findIndex(
+        (user) => user._id === action.payload._id
+      );
+      state.entities[index] = action.payload;
+    },
   },
 });
 export const signUp = (payload) => async (dispatch) => {
   try {
-    const data = await authService.register(payload);
-
-    localStorageService.setTokens({ ...data, userId: data.newUser._id });
+    const { data } = await authService.register(payload);
+    localStorageService.setTokens({ ...data, userId: data.userId });
     dispatch(authRequestSuccess({ userId: data.userId }));
     dispatch(userCreated(data.newUser));
     return true;
@@ -66,8 +71,20 @@ export const signUp = (payload) => async (dispatch) => {
 export const signIn = (payload) => async (dispatch) => {
   try {
     const data = await authService.login(payload);
+
     localStorageService.setTokens(data);
     dispatch(authRequestSuccess({ userId: data.userId }));
+    return true;
+  } catch (error) {
+    const { message } = error.response.data.error;
+    dispatch(authRequestFailed(message));
+  }
+};
+export const updateUser = (payload, id) => async (dispatch) => {
+  try {
+    const data = await userService.updateUser(payload, id);
+    console.log(data);
+    dispatch(userUpdated(data));
     return true;
   } catch (error) {
     const { message } = error.response.data.error;
@@ -84,6 +101,8 @@ export const loadUsersList = () => async (dispatch) => {
   }
 };
 const { reducer: userReducer, actions } = userSlice;
+export const findUserById = (id) => (state) =>
+  state.users.entities.find((user) => user._id === id);
 export const getAuthError = () => (state) => state.users.error;
 export const getCurrentUserId = () => (state) => state.users.auth.userId;
 export const getUsersLoadingStatus = () => (state) => state.users.dataLoaded;
@@ -93,6 +112,7 @@ const {
   authRequestFailed,
   usersRequested,
   usersReceived,
+  userUpdated,
   usersRequestFailed,
   userCreated,
 } = actions;

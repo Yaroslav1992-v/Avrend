@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { getIsLoggedIn } from "./store/user";
 import AppLoader from "./common/ui/hoc/appLoader";
 import UserProfile from "./pages/Profile/userProfile";
+import EditUser from "./pages/edit/editUser";
 
 function App() {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -16,10 +17,13 @@ function App() {
     <div className="App">
       <AppLoader>
         <Routes>
-          <Route path="/" element={isLoggedIn ? <Home /> : <Start />}></Route>
-          <Route path="/users/:userId" element={<UserProfile />} />
+          <Route path="/users/:userId">
+            <Route index element={<UserProfile />} />
+            <Route path="edit" element={<EditUser />} />
+          </Route>
           {!isLoggedIn && <Route path="/login" element={<Login />}></Route>}
           <Route path="*" element={isLoggedIn ? <Home /> : <Start />} />
+          <Route path="/" element={isLoggedIn ? <Home /> : <Start />}></Route>
         </Routes>
       </AppLoader>
     </div>

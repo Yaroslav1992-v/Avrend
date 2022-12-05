@@ -3,7 +3,7 @@ import localStorageService from "./localStorage.service";
 const apiEndPoint = "/auth/";
 const authService = {
   register: async (user) => {
-    const { data } = await httpService.post(`${apiEndPoint}signUp`, {
+    const data = await httpService.post(`${apiEndPoint}signUp`, {
       ...user,
     });
 

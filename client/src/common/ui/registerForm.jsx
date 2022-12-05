@@ -34,6 +34,7 @@ const RegisterForm = () => {
       return;
     }
     const register = await dispatch(signUp(user));
+    console.log(register);
     if (register) {
       navigate("/");
     }

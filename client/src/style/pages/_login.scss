@@ -121,6 +121,20 @@
       border: 2px solid $grey-500;
     }
   }
+  &__file {
+    display: none;
+  }
+  &__fileUpload {
+    cursor: pointer;
+    position: relative;
+
+    svg {
+      position: absolute;
+      color: $red;
+      left: 60px;
+      bottom: 10px;
+    }
+  }
   &__submit {
     cursor: pointer;
     width: 100%;

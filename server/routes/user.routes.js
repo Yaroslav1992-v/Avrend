@@ -12,4 +12,23 @@ router.get("/", async (req, res) => {
     });
   }
 });
+router.patch("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+    console.log(req.body);
+    if (userId === req.body._id) {
+      const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
+        new: true,
+      });
+      res.send(updatedUser);
+    } else {
+      res.status(401).json({ message: "Unathorized" });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 export default router;

@@ -14,7 +14,7 @@ export const registerValidator = {
   accountName: {
     isRequired: { message: "Name is Required For Registration " },
     min: {
-      message: "Name must contain  at least 5 symbols",
+      message: "account name must contain  at least 5 symbols",
       value: 5,
     },
   },
@@ -31,6 +31,33 @@ export const registerValidator = {
     min: {
       message: "Password Must Contain At Least 8 Symbols",
       value: 8,
+    },
+  },
+};
+export const editValidator = {
+  accountName: {
+    isRequired: { message: "Name is Required For Registration " },
+    min: {
+      message: "account name must contain  at least 5 symbols",
+      value: 5,
+    },
+    max: {
+      message: "account name lengtn cant be more than 20 symbols",
+      value: 20,
+    },
+  },
+  lastName: {
+    isRequired: { message: "Name is Required For Registration " },
+    max: {
+      message: "last Name lengtn cant be more than 20 symbols",
+      value: 20,
+    },
+  },
+  firstName: {
+    isRequired: { message: "Name is Required For Registration " },
+    max: {
+      message: "first name lengtn cant be more than 20 symbols",
+      value: 20,
     },
   },
 };
