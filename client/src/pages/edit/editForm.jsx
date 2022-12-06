@@ -4,11 +4,16 @@ import TextField from "../../common/form/textField";
 import fileService from "../../services/file.service";
 import { editValidator } from "../../utils/validatorsConfig";
 import { validator } from "../../utils/validator";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { findUserById, updateUser } from "../../store/user";
+import {
+  findUserById,
+  getAuthError,
+  getCurrentUserId,
+  updateUser,
+} from "../../store/user";
 const EditForm = () => {
-  const { userId } = useParams();
+  const userId = useSelector(getCurrentUserId());
   const getUser = useSelector(findUserById(userId));
   const [user, setUser] = useState(getUser);
   const validate = () => {
@@ -27,6 +32,7 @@ const EditForm = () => {
       return user.picturePath;
     }
   };
+  const backEndError = useSelector(getAuthError());
   const handleSubmit = async (e) => {
     e.preventDefault();
     validate();
@@ -101,7 +107,7 @@ const EditForm = () => {
         value={user.location}
       />
 
-      {/* {backEndError && <p className="form_error">{backEndError}</p>} */}
+      {backEndError && <p className="form_error">{backEndError}</p>}
       <button className="form__submit btn">Edit</button>
     </form>
   );

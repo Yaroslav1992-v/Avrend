@@ -2,6 +2,7 @@ import React from "react";
 import UserImage from "../../../common/ui/userImage";
 import PropTypes from "prop-types";
 import { formatDate } from "../../../utils/formatDate";
+import { getFullName } from "../../../utils/helpers";
 const HeaderTop = ({
   picturePath,
   firstName,
@@ -9,18 +10,7 @@ const HeaderTop = ({
   occupation,
   createdAt,
 }) => {
-  const getFullName = () => {
-    if (firstName && lastName) {
-      return `${firstName} ${lastName}`;
-    }
-    if (firstName && !lastName) {
-      return firstName;
-    } else if (!firstName && lastName) {
-      return lastName;
-    }
-    return "";
-  };
-  const fullName = getFullName();
+  const fullName = getFullName(firstName, lastName);
   return (
     <div className="user__header-top">
       <div className="user__imgBox">

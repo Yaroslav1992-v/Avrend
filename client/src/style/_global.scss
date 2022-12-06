@@ -20,3 +20,28 @@ body {
   display: flex;
   transition: all 0.5s ease;
 }
+.addPostLink {
+  height: 74px;
+  width: 74px;
+  border-radius: 50%;
+  background-color: $orange;
+  @include center;
+  border: solid 1px transparent;
+  box-shadow: 0px 8px 10px rgba(141, 106, 66, 0.29);
+  transition: background-color, border-color ease 0.5s;
+  position: absolute;
+  svg {
+    color: $white;
+    font-size: 26px;
+    transition: font-size ease 0.5s;
+  }
+  &:hover {
+    background-color: $red;
+    svg {
+      font-size: 30px;
+    }
+  }
+  &:focus {
+    border-color: $black;
+  }
+}

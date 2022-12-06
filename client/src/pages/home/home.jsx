@@ -13,11 +13,7 @@ const Home = () => {
           <NavBar
             check={true}
             children={
-              <UserImage
-                img={user.picturePath}
-                size={50}
-                link={`/users/${userId}`}
-              />
+              <UserImage img={user.picturePath} size={50} link={`/${userId}`} />
             }
           />
         </div>

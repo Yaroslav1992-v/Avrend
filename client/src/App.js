@@ -10,6 +10,9 @@ import { getIsLoggedIn } from "./store/user";
 import AppLoader from "./common/ui/hoc/appLoader";
 import UserProfile from "./pages/Profile/userProfile";
 import EditUser from "./pages/edit/editUser";
+import AddPost from "./pages/addPost/addPost";
+import Posts from "./pages/posts/posts";
+import Comments from "./pages/comments/comments";
 
 function App() {
   const isLoggedIn = useSelector(getIsLoggedIn());
@@ -17,10 +20,13 @@ function App() {
     <div className="App">
       <AppLoader>
         <Routes>
-          <Route path="/users/:userId">
+          <Route path="/:userId">
             <Route index element={<UserProfile />} />
             <Route path="edit" element={<EditUser />} />
+            <Route path="addPost" element={<AddPost />} />
+            <Route path="posts" element={<Posts />} />
           </Route>
+          <Route path="p/:postId/comments" element={<Comments />} />
           {!isLoggedIn && <Route path="/login" element={<Login />}></Route>}
           <Route path="*" element={isLoggedIn ? <Home /> : <Start />} />
           <Route path="/" element={isLoggedIn ? <Home /> : <Start />}></Route>

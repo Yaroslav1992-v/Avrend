@@ -1,0 +1,37 @@
+.comments {
+  &__container {
+    padding: calc(#{$size} * 3) 30px;
+    background-color: $white;
+    position: relative;
+  }
+  &__form {
+    padding: 20px 0;
+    border-top: 1px solid $grey-400;
+    display: flex;
+    align-items: center;
+    &-sender {
+      margin-right: 15px;
+    }
+    max-height: 150px;
+  }
+  &__field {
+    outline-color: transparent;
+    border: none;
+    resize: none;
+    height: 30px;
+    margin-right: 5px;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+  &__publish {
+    background-color: transparent;
+    color: $orange;
+    padding: 5px;
+    transition: color ease 0.5s;
+    &:hover,
+    &:focus {
+      color: $red;
+    }
+  }
+}

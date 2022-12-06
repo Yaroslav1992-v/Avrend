@@ -44,7 +44,10 @@
       color: $grey-400;
     }
   }
-  &__edit {
+  &__actions {
+    margin-bottom: 15px;
+  }
+  &__action {
     margin-bottom: 15px;
     &-link {
       padding: 3px 15px;
@@ -52,8 +55,11 @@
       background-color: $white-100;
       font-weight: 600;
       color: $black;
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
       border: 1px solid transparent;
-      transition: background-color color border-color 0.5s ease;
+      transition: background-color, color, border-color 0.5s ease;
       &:hover {
         background-color: $grey;
         color: $black-100;
@@ -117,6 +123,7 @@
   &__post {
     max-width: 150px;
     height: 105px;
+    width: 100%;
     position: relative;
     margin-bottom: 15px;
     &:hover {

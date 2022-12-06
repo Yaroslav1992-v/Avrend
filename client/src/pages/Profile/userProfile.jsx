@@ -9,16 +9,19 @@ import UserHeader from "./userHeader";
 const UserProfile = () => {
   const { userId } = useParams();
   const user = useSelector(findUserById(userId));
+
   return (
-    <section className="user">
-      <div className="container">
-        <div className="user__container">
-          <NavBar check={true} children={<NavDots />} title="Profile" />
-          <UserHeader user={user} />
-          <UserContent />
+    <>
+      <section className="user">
+        <div className="container">
+          <div className="user__container">
+            <NavBar check={true} children={<NavDots />} title="Profile" />
+            <UserHeader user={user} />
+            <UserContent userId={userId} />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
