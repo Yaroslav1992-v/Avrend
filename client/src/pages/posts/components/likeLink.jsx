@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { FcLike } from "react-icons/fc";
 import { AiTwotoneHeart } from "react-icons/ai";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUserId } from "../../../store/user";
 import { likePost, removeLikeFromPost } from "../../../store/postLike";
+import UsersPopUp from "../../../common/ui/usersPopUp";
 const LikeLink = ({ post, postLikes }) => {
   const [liked, setLiked] = useState({});
+  const [popup, setPopup] = useState(false);
   const currentUser = useSelector(getCurrentUserId());
   const dispatch = useDispatch();
   const submitLike = async () => {
@@ -21,6 +22,7 @@ const LikeLink = ({ post, postLikes }) => {
       setLiked({});
     }
   };
+
   useEffect(() => {
     const ifUserLiked = postLikes.find((l) => l.userId === currentUser);
     if (ifUserLiked) {
@@ -37,9 +39,15 @@ const LikeLink = ({ post, postLikes }) => {
           <AiTwotoneHeart className="action__notLiked" />
         )}
       </button>
-      <Link className="action__amount" to="posts/:id/likes">
+      <button
+        onClick={() => setPopup((prevState) => !prevState)}
+        className="action__amount"
+      >
         {postLikes.length}
-      </Link>
+      </button>
+      {popup && (
+        <UsersPopUp title="Likes" setPopUp={setPopup} data={postLikes} />
+      )}
     </div>
   );
 };

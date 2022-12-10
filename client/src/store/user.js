@@ -109,6 +109,21 @@ export const findUserByAccountName = (accountName) => (state) =>
 export const findUserById = (id) => (state) =>
   state.users.entities.find((user) => user._id === id);
 export const getAuthError = () => (state) => state.users.error;
+export const getUsersByIds = (array) => (state) => {
+  const users = [];
+  array.forEach((item) => {
+    console.log(item);
+    const value = typeof item === "string" ? item : item.userId;
+    console.log(value);
+    const user = state.users.entities.find(
+      (u) => u._id === value && value !== state.users.auth.userId
+    );
+    if (user) {
+      users.push(user);
+    }
+  });
+  return users;
+};
 export const getCurrentUserId = () => (state) => state.users.auth.userId;
 export const getCurrentUser = () => (state) => state.users.currentUser;
 export const getUsersLoadingStatus = () => (state) => state.users.dataLoaded;

@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { transformDate } from "../../../utils/formatDate";
 import { useDispatch } from "react-redux";
 import { removeComment } from "../../../store/comments";
+import UsersPopUp from "../../../common/ui/usersPopUp";
 
 const CommentBottom = ({
   comment,
   edit,
-  amount,
+  likes,
   onEdit,
   handleEdit,
   onReply,
@@ -23,6 +23,7 @@ const CommentBottom = ({
   const deleteComment = () => {
     dispatch(removeComment(comment._id, comment.postId));
   };
+  const [popup, setPopup] = useState(false);
   return (
     <div className="comment__bottom">
       {edit ? (
@@ -37,7 +38,12 @@ const CommentBottom = ({
       ) : (
         <>
           <span className="comment__bottom-data">{date}</span>
-          <Link className="comment__bottom-data">liked : {amount}</Link>
+          <button
+            onClick={() => setPopup((prevState) => !prevState)}
+            className="comment__bottom-data"
+          >
+            liked : {likes.length}
+          </button>
           <button
             onClick={() =>
               onReply({
@@ -63,13 +69,14 @@ const CommentBottom = ({
           )}
         </>
       )}
+      {popup && <UsersPopUp title="likes" setPopUp={setPopup} data={likes} />}
     </div>
   );
 };
 
 CommentBottom.propTypes = {
   comment: PropTypes.object,
-  amount: PropTypes.number,
+  likes: PropTypes.number,
   accountName: PropTypes.string,
   edit: PropTypes.bool,
   userId: PropTypes.string,

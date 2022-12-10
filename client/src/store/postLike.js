@@ -1,6 +1,5 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import likeService from "../services/like.service";
-import { updateComment } from "./comments";
 import { updatePost } from "./post";
 const initialState = {
   entities: [],

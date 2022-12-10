@@ -19,6 +19,7 @@
 }
 .post {
   background-color: $white;
+  position: relative;
   &__header {
     display: flex;
     padding: 15px;

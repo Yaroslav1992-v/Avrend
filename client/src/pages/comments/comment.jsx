@@ -105,7 +105,7 @@ const Comment = ({ comment, onReply, comments }) => {
               accountName={user.accountName}
               comment={comment}
               handleEdit={handleEdit}
-              amount={likes.length}
+              likes={likes}
               onReply={onReply}
             />
           </div>

@@ -29,7 +29,11 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
-    friends: {
+    following: {
+      type: Array,
+      default: [],
+    },
+    followers: {
       type: Array,
       default: [],
     },
