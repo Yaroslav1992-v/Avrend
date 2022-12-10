@@ -34,4 +34,17 @@ router.delete("/:postId", async (req, res) => {
     }
   }
 });
+router.patch("/:postId", async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const list = await Post.findByIdAndUpdate(postId, req.body, {
+      new: true,
+    });
+    res.send(list);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
 export default router;

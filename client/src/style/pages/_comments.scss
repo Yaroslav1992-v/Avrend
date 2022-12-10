@@ -3,9 +3,20 @@
     padding: calc(#{$size} * 3) 30px;
     background-color: $white;
     position: relative;
+    height: auto;
+  }
+  &__cover {
+    height: 100%;
+    background-color: $white;
+    position: relative;
+    z-index: 3443;
   }
   &__form {
-    padding: 20px 0;
+    position: fixed;
+    padding: 20px 10px;
+    bottom: 0;
+    z-index: 999;
+    background-color: $white;
     border-top: 1px solid $grey-400;
     display: flex;
     align-items: center;
@@ -31,6 +42,96 @@
     transition: color ease 0.5s;
     &:hover,
     &:focus {
+      color: $red;
+    }
+  }
+  &__toggle {
+    background-color: transparent;
+    color: $orange;
+    display: flex;
+    margin: 0 auto;
+  }
+}
+.comment {
+  margin-bottom: 20px;
+  &__container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  &__sender {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    display: flex;
+  }
+
+  &__author {
+    color: $black;
+    font-weight: 600;
+    margin-right: 5px;
+  }
+  &__content {
+    color: $grey-400;
+    padding: 5px;
+    overflow-wrap: anywhere;
+  }
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    &-data {
+      margin-right: 10px;
+      font-weight: 600;
+      color: $black;
+    }
+  }
+  &__reply {
+    background-color: transparent;
+    font-weight: 600;
+    margin-right: 5px;
+  }
+
+  &__like {
+    display: flex;
+    margin: auto 0 auto auto;
+    background-color: transparent;
+    svg {
+      color: $grey;
+    }
+  }
+  &__edit {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+    align-self: center;
+  }
+  &__children {
+    padding-left: 20px !important;
+  }
+  &__save {
+    background-color: $grey-300;
+    padding: 1px 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+    color: $white;
+    transition: background-color 0.5s ease-in-out;
+    &:hover {
+      background-color: $grey-400;
+    }
+  }
+  &__span {
+    color: $black;
+    font-weight: 600;
+  }
+  &__cancel,
+  &__delete {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    svg {
       color: $red;
     }
   }

@@ -3,12 +3,12 @@ import CommentLink from "./commentLink";
 import LikeLink from "./likeLink";
 import ShareLink from "./shareLink";
 import PropTypes from "prop-types";
-const PostBottom = ({ postId }) => {
+const PostBottom = ({ post, likes }) => {
   return (
     <div className="post__bottom">
       <div className="post__bottom-left">
-        <LikeLink amount={221} />
-        <CommentLink postId={postId} amount={12} />
+        <LikeLink postLikes={likes} post={post} />
+        <CommentLink postId={post._id} amount={post.comments.length} />
       </div>
       <div className="post__bottom-right">
         <ShareLink />
@@ -17,6 +17,7 @@ const PostBottom = ({ postId }) => {
   );
 };
 PostBottom.propTypes = {
-  postId: PropTypes.string,
+  post: PropTypes.object,
+  likes: PropTypes.array,
 };
 export default PostBottom;

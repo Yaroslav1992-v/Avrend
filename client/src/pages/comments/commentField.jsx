@@ -1,17 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-const CommentField = ({ placeholder, name, onChange }) => {
+import { useRef } from "react";
+const CommentField = ({ focus, placeholder, name, onChange, value }) => {
+  const textRef = useRef();
   const handleChange = (e) => {
     const height = e.target.scrollHeight;
+
     if (height < 60) {
       e.target.style.height = height + "px";
     }
     onChange(e);
   };
+  if (focus) {
+    textRef.current.focus();
+  }
   return (
     <textarea
+      ref={textRef}
       className="comments__field"
       onChange={handleChange}
+      value={value}
       name={name}
       placeholder={placeholder}
     />
@@ -19,7 +27,9 @@ const CommentField = ({ placeholder, name, onChange }) => {
 };
 CommentField.propTypes = {
   name: PropTypes.string,
+  focus: PropTypes.bool,
   error: PropTypes.string,
   onChange: PropTypes.func,
+  value: PropTypes.string,
 };
 export default CommentField;

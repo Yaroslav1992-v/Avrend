@@ -21,7 +21,6 @@ http.interceptors.request.use(
         const data = await authService.refreshToken();
         localStorageService.setTokens(data);
       }
-
       if (accessToken) {
         config.headers = {
           ...config.headers,
@@ -29,6 +28,7 @@ http.interceptors.request.use(
         };
       }
     }
+
     return config;
   },
   function (error) {

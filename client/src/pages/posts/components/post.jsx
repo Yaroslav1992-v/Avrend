@@ -3,9 +3,10 @@ import { getFullName } from "../../../utils/helpers";
 import PostBottom from "./postBottom";
 import PostHeader from "./postHeader";
 import PostContent from "./postMiddle";
-const Post = ({ post, user }) => {
+const Post = ({ post, user, likes }) => {
   const { firstName, lastName } = user;
   const fullName = getFullName(firstName, lastName);
+  const postLikes = likes.filter((l) => l.postId === post._id);
   return (
     <div className="post">
       <PostHeader
@@ -15,9 +16,9 @@ const Post = ({ post, user }) => {
         date={post.createdAt}
       />
       <PostContent img={post.picturePath} text={post.content} />
-      <PostBottom postId={post._id} />
+      <PostBottom likes={postLikes} post={post} />
     </div>
   );
 };
 
-export default Post;
+export default React.memo(Post);

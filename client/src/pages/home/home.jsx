@@ -6,20 +6,26 @@ import { findUserById, getCurrentUserId } from "../../store/user";
 const Home = () => {
   const userId = useSelector(getCurrentUserId());
   const user = useSelector(findUserById(userId));
-  return (
-    <section className="home">
-      <div className="container">
-        <div className="home__container">
-          <NavBar
-            check={true}
-            children={
-              <UserImage img={user.picturePath} size={50} link={`/${userId}`} />
-            }
-          />
+  if (userId && user) {
+    return (
+      <section className="home">
+        <div className="container">
+          <div className="home__container">
+            <NavBar
+              check={true}
+              children={
+                <UserImage
+                  img={user.picturePath}
+                  size={50}
+                  link={`/${userId}`}
+                />
+              }
+            />
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  }
 };
 
 export default Home;

@@ -9,6 +9,10 @@ const postService = {
     const { data } = await httpService.delete(apiEndPoint + postId);
     return data;
   },
+  updatePost: async (post, postId) => {
+    const { data } = await httpService.patch(apiEndPoint + postId, post);
+    return data;
+  },
   getPosts: async () => {
     const { data } = await httpService.get(apiEndPoint);
     return data;

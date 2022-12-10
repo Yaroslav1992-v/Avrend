@@ -41,9 +41,9 @@ export const postSlice = createSlice({
     },
   },
 });
-const commentCreateRequested = createAction("post/CreateRequest");
+const postCreateRequested = createAction("post/CreateRequest");
 export const createPost = (post) => async (dispatch) => {
-  dispatch(commentCreateRequested());
+  dispatch(postCreateRequested());
   try {
     const content = await postService.createPost(post);
     dispatch(postCreated(content));
@@ -51,6 +51,13 @@ export const createPost = (post) => async (dispatch) => {
   } catch (error) {
     dispatch(postsRequestFailed());
   }
+};
+export const updatePost = (post) => async (dispatch) => {
+  try {
+    const data = await postService.updatePost(post, post._id);
+    dispatch(postUpdated(data));
+    return true;
+  } catch (error) {}
 };
 export const loadPosts = () => async (dispatch) => {
   dispatch(postsRequested());

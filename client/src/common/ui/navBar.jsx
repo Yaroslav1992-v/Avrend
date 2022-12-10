@@ -7,6 +7,7 @@ const NavBar = ({ title, children, check }) => {
   const toggleMenu = () => {
     setOpen((prevState) => !prevState);
   };
+
   return (
     <nav className={"navigation" + (check ? " navigation-between" : "")}>
       <button className="navigation__btn" onClick={toggleMenu}></button>

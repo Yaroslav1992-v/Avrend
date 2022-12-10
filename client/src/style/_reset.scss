@@ -28,6 +28,7 @@ dd {
 
 ul[class] {
   list-style: none;
+  padding: 0;
 }
 
 img {
@@ -45,6 +46,7 @@ select {
 button {
   border-width: 0;
   padding: 0;
+  background-color: transparent;
   cursor: pointer;
 }
 a {

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./style/index.scss";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./pages/login/login";
 import Start from "./pages/start/Start";
 import Home from "./pages/home/home";
@@ -18,20 +18,27 @@ function App() {
   const isLoggedIn = useSelector(getIsLoggedIn());
   return (
     <div className="App">
-      <AppLoader>
+      {isLoggedIn ? (
+        <AppLoader>
+          <Routes>
+            <Route path="/:userId">
+              <Route index element={<UserProfile />} />
+              <Route path="edit" element={<EditUser />} />
+              <Route path="addPost" element={<AddPost />} />
+              <Route path="posts" element={<Posts />} />
+            </Route>
+            <Route path="p/:postId/comments" element={<Comments />} />
+            <Route path="*" element={<Home />} />
+            <Route path="/" element={<Home />}></Route>
+          </Routes>
+        </AppLoader>
+      ) : (
         <Routes>
-          <Route path="/:userId">
-            <Route index element={<UserProfile />} />
-            <Route path="edit" element={<EditUser />} />
-            <Route path="addPost" element={<AddPost />} />
-            <Route path="posts" element={<Posts />} />
-          </Route>
-          <Route path="p/:postId/comments" element={<Comments />} />
-          {!isLoggedIn && <Route path="/login" element={<Login />}></Route>}
-          <Route path="*" element={isLoggedIn ? <Home /> : <Start />} />
-          <Route path="/" element={isLoggedIn ? <Home /> : <Start />}></Route>
+          <Route path="/" element={<Start />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="*" element={<Start />} />
         </Routes>
-      </AppLoader>
+      )}
     </div>
   );
 }

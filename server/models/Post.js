@@ -13,8 +13,8 @@ const schema = Schema(
       type: String,
       required: true,
     },
-
     likes: [{ type: Schema.Types.ObjectId, ref: "Like" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     timestamps: { createdAt: "created_at" },

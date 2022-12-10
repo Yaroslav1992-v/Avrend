@@ -8,20 +8,37 @@ import {
   loadUsersList,
 } from "../../../store/user";
 import { getPostLoadingStatus, loadPosts } from "../../../store/post";
+import {
+  getCommentsLoadingStatus,
+  loadComments,
+} from "../../../store/comments";
+import { loadCommentLikes } from "../../../store/commentLike";
+import { useNavigate } from "react-router-dom";
+import { loadPostLikes } from "../../../store/postLike";
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn());
   const getDataLoaded = useSelector(getUsersLoadingStatus());
   const getPostIsLoaded = useSelector(getPostLoadingStatus());
+  const getCommentLoaded = useSelector(getCommentsLoadingStatus());
+  // const getLikesIsLoaded = useSelector(getPostLoadingStatus());
   const dataLoaded = () => {
-    return getDataLoaded && getPostIsLoaded;
+    return getDataLoaded && getPostIsLoaded && getCommentLoaded;
   };
+  const navigate = useNavigate();
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(loadUsersList());
       dispatch(loadPosts());
+      dispatch(loadComments());
+      dispatch(loadCommentLikes());
+      dispatch(loadPostLikes());
+    }
+    if (!isLoggedIn) {
+      navigate("/");
     }
   }, [isLoggedIn]);
+
   if (isLoggedIn && !dataLoaded()) return <Loader />;
   return children;
 };

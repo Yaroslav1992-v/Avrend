@@ -2,12 +2,16 @@ import { Schema, model } from "mongoose";
 const schema = Schema(
   {
     content: { type: String, required: true },
-    userId: { type: Schema.Types.ObjectId, ref: "User" },
-    postId: { type: Schema.Types.ObjectId, ref: "Post" },
+    parentId: { type: String, default: null },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    accountName: { type: String },
+    postId: { type: Schema.Types.ObjectId, ref: "Post", required: true },
+    replies: [],
+    likes: [{ type: Schema.Types.ObjectId, ref: "CommentLike" }],
   },
   {
     timestamps: { createdAt: "created_at" },
   }
 );
-const Like = model("Like", schema);
-export default Like;
+const Comment = model("Comment", schema);
+export default Comment;
