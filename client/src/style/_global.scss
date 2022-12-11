@@ -45,3 +45,22 @@ body {
     border-color: $black;
   }
 }
+.search-query {
+  display: flex;
+  position: relative;
+  &__input {
+    padding: 20px;
+    background-color: $white-100;
+    border-radius: 73px;
+    width: 100%;
+    outline-color: transparent;
+    border-color: transparent;
+  }
+  svg {
+    position: absolute;
+    font-size: 30px;
+    right: 12px;
+    top: 17px;
+    color: $grey-300;
+  }
+}

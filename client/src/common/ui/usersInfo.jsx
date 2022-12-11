@@ -30,7 +30,7 @@ const UsersInfo = ({ user }) => {
     setIsFollowing((prevState) => !prevState);
   };
   return (
-    <div className="users__like">
+    <div className="users__box">
       <div className="users__user">
         <div className="users__userImg">
           <UserImage size={40} img={user.picturePath} link={`/${user._id}`} />

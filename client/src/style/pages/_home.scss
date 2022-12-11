@@ -1,7 +1,45 @@
 .home {
   &__container {
+    padding: calc(#{$size} * 3) 5px;
     background-color: $white;
-    padding: 0 28px;
     position: relative;
+    height: auto;
+  }
+  &__header {
+    position: relative;
+    padding: 0 15px;
+  }
+  &__title {
+    font-size: 30px;
+    width: 800px;
+    margin-bottom: 25px;
+  }
+  &__search {
+    width: 100%;
+    position: relative;
+    margin-bottom: 25px;
+  }
+  &__users {
+    padding: 5px;
+    border: 1px solid $grey;
+    border-radius: 10px;
+    position: absolute;
+    max-width: 280px;
+    width: 100%;
+    z-index: 5;
+    margin: auto auto;
+    background-color: $white;
+    right: 0;
+    left: 0;
+    display: inline-block;
+  }
+  &__content {
+    padding: 30px 10px !important;
+  }
+  &__item {
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.11);
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 20px;
   }
 }

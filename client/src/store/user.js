@@ -100,7 +100,7 @@ export const loadUsersList = () => async (dispatch) => {
     const data = await userService.getUsers();
     dispatch(usersReceived(data));
   } catch (error) {
-    dispatch(usersRequestFailed());
+    dispatch(usersRequestFailed(error.message));
   }
 };
 const { reducer: userReducer, actions } = userSlice;
@@ -109,10 +109,10 @@ export const findUserByAccountName = (accountName) => (state) =>
 export const findUserById = (id) => (state) =>
   state.users.entities.find((user) => user._id === id);
 export const getAuthError = () => (state) => state.users.error;
+export const getAllUsers = () => (state) => state.users.entities;
 export const getUsersByIds = (array) => (state) => {
   const users = [];
   array.forEach((item) => {
-    console.log(item);
     const value = typeof item === "string" ? item : item.userId;
     console.log(value);
     const user = state.users.entities.find(

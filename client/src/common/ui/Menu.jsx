@@ -4,7 +4,12 @@ import menuPic from "../../assets/menu.png";
 import logo from "../../assets/logo.png";
 import PropTypes from "prop-types";
 const Menu = ({ check, toggleMenu }) => {
-  const menu = ["home", "chats", "notification", "settings"];
+  const menu = [
+    { name: "home", location: "/" },
+    { name: "chats", location: "chats" },
+    { name: "notifications", location: "notifications" },
+    { name: "settings", location: "settings" },
+  ];
   return (
     <div className={"menu" + (check ? " menu-active" : "")}>
       <div className="menu__background">
@@ -21,8 +26,8 @@ const Menu = ({ check, toggleMenu }) => {
       <ul className="menu__list">
         {menu.map((item, index) => (
           <li key={index} className="menu__item">
-            <Link to={item} className="menu__link">
-              {item}
+            <Link to={item.location} className="menu__link">
+              {item.name}
             </Link>
           </li>
         ))}

@@ -69,6 +69,16 @@ export const loadPosts = () => async (dispatch) => {
   }
 };
 export const getPostLoadingStatus = () => (state) => state.posts.dataLoaded;
+export const getPostsByUserId = (array) => (state) => {
+  let posts = [];
+  array.forEach((item) => {
+    posts = [
+      ...posts,
+      ...state.posts.entities.filter((post) => post.userId === item),
+    ];
+  });
+  return posts;
+};
 export const getPostsById = (id) => (state) =>
   state.posts.entities.filter((post) => post.userId === id);
 const { reducer: postReducer, actions } = postSlice;
