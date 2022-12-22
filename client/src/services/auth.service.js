@@ -18,12 +18,15 @@ const authService = {
     return data;
   },
   refreshToken: async () => {
-    const { data } = await httpService.post(`${apiEndPoint}token`, {
-      grant_type: "refresh_token",
-      refresh_token: localStorageService.getRefreshToken(),
-    });
-
-    return data;
+    try {
+      const { data } = await httpService.post(`${apiEndPoint}token`, {
+        grant_type: "refresh_token",
+        refresh_token: localStorageService.getRefreshToken(),
+      });
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 

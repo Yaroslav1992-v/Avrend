@@ -5,13 +5,13 @@ dotenv.config();
 export default new (class tokenService {
   generate(payload) {
     const accessToken = jwt.sign(payload, process.env.accessKey, {
-      expiresIn: "1h",
+      expiresIn: "1000h",
     });
     const refreshToken = jwt.sign(payload, process.env.refreshKey);
     return {
       accessToken,
       refreshToken,
-      expiresIn: 3600,
+      expiresIn: 3600000,
     };
   }
   async save(user, refreshToken) {
@@ -32,7 +32,7 @@ export default new (class tokenService {
   }
   validateAccess(accessToken) {
     try {
-      return jwt.verify(accessToken, process.env.accessKey);
+      return jwt.decode(accessToken, process.env.accessKey);
     } catch (error) {
       return null;
     }

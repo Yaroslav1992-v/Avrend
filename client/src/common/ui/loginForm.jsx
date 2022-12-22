@@ -6,12 +6,14 @@ import { loginValidator } from "../../utils/validatorsConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuthError, signIn } from "../../store/user";
 import { useNavigate } from "react-router-dom";
+import Loader from "../loader/loader";
 const LoginForm = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     remember: "",
   });
+  const [loading, setLoading] = useState(false);
   const backEndError = useSelector(getAuthError());
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const LoginForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     validate();
     if (Object.keys(errors).length > 0) {
       return;
@@ -57,7 +60,9 @@ const LoginForm = () => {
       />
       {backEndError && <p className="form_error">{backEndError}</p>}
       <RadioField name="remember" onChange={handleChange} />
-      <button className="form__submit btn">Sign In</button>
+      <button className="form__submit btn">
+        {loading && <Loader />}Sign In
+      </button>
     </form>
   );
 };

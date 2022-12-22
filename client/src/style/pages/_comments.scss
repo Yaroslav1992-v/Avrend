@@ -3,19 +3,22 @@
     padding: calc(#{$size} * 3) 30px;
     background-color: $white;
     position: relative;
-    height: auto;
   }
   &__cover {
     height: 100%;
     background-color: $white;
-    position: relative;
+    max-height: 500px;
+    overflow: auto;
     z-index: 3443;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
   }
   &__form {
-    position: fixed;
+    position: absolute;
     padding: 20px 10px;
     bottom: 0;
-    z-index: 999;
+    z-index: 50;
     background-color: $white;
     border-top: 1px solid $grey-400;
     display: flex;
@@ -29,7 +32,7 @@
     outline-color: transparent;
     border: none;
     resize: none;
-    height: 30px;
+    height: 50px;
     margin-right: 5px;
     &::-webkit-scrollbar {
       width: 0;

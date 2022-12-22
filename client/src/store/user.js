@@ -114,7 +114,6 @@ export const getUsersByIds = (array) => (state) => {
   const users = [];
   array.forEach((item) => {
     const value = typeof item === "string" ? item : item.userId;
-    console.log(value);
     const user = state.users.entities.find(
       (u) => u._id === value && value !== state.users.auth.userId
     );

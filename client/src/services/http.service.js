@@ -11,22 +11,15 @@ http.interceptors.request.use(
     const refreshToken = localStorageService.getRefreshToken();
     const isExpired = refreshToken && expiresDate < Date.now();
     const accessToken = localStorageService.getAccessToken();
+
+    if (isExpired) {
+      localStorageService.removeAuthData();
+    }
     if (accessToken) {
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${accessToken}`,
       };
-    } else {
-      if (isExpired) {
-        const data = await authService.refreshToken();
-        localStorageService.setTokens(data);
-      }
-      if (accessToken) {
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${accessToken}`,
-        };
-      }
     }
 
     return config;
@@ -35,6 +28,10 @@ http.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+async function refresh() {
+  const data = await authService.refreshToken();
+  localStorageService.setTokens(data);
+}
 const httpService = {
   get: http.get,
   post: http.post,

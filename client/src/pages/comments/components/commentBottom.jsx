@@ -76,7 +76,7 @@ const CommentBottom = ({
 
 CommentBottom.propTypes = {
   comment: PropTypes.object,
-  likes: PropTypes.number,
+  likes: PropTypes.array,
   accountName: PropTypes.string,
   edit: PropTypes.bool,
   userId: PropTypes.string,

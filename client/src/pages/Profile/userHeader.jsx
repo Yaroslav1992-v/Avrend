@@ -5,6 +5,9 @@ import HeaderTop from "./components/userHeaderTop";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser, updateUser } from "../../store/user";
+import { createNotification } from "../../store/notification";
+import { UseApp } from "../../common/ui/hoc/appLoader";
+import notificationService from "../../services/notification.service";
 const UserHeader = ({ user, data }) => {
   const { userId } = useParams();
   const currentUser = useSelector(getCurrentUser());
@@ -12,8 +15,8 @@ const UserHeader = ({ user, data }) => {
   const [isFollowing, setIsFollowing] = useState(
     currentUser.following.includes(user._id)
   );
-
-  const follow = () => {
+  const { socket } = UseApp();
+  const follow = async () => {
     const followers = isFollowing
       ? user.followers.filter((id) => id !== currentUser._id)
       : [...user.followers, currentUser._id];
@@ -25,6 +28,24 @@ const UserHeader = ({ user, data }) => {
       ...currentUser,
       following: following,
     };
+    if (!isFollowing) {
+      const notification = await dispatch(
+        createNotification({
+          type: "follow",
+          notifier: user._id,
+          typeId: user._id,
+        })
+      );
+      socket.emit("notify", notification, user._id);
+    } else {
+      const deletedNot = await notificationService.deleteNotificationBySender(
+        user._id,
+        "follow"
+      );
+      if (deletedNot) {
+        socket.emit("deletedNot", deletedNot, user._id);
+      }
+    }
     dispatch(updateUser(pageUser, pageUser._id));
     dispatch(updateUser(currentUserData, currentUser._id));
     setIsFollowing((prevState) => !prevState);

@@ -6,10 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUserId } from "../../../store/user";
 import { likePost, removeLikeFromPost } from "../../../store/postLike";
 import UsersPopUp from "../../../common/ui/usersPopUp";
+import { UseApp } from "../../../common/ui/hoc/appLoader";
+import { createNotification } from "../../../store/notification";
+import notificationService from "../../../services/notification.service";
 const LikeLink = ({ post, postLikes }) => {
+  const { socket } = UseApp();
   const [liked, setLiked] = useState({});
   const [popup, setPopup] = useState(false);
   const currentUser = useSelector(getCurrentUserId());
+  const subsContent = (content) =>
+    content.length > 35 ? content.substring(0, 35) + "..." : content;
   const dispatch = useDispatch();
   const submitLike = async () => {
     if (Object.keys(liked).length === 0) {
@@ -17,9 +23,26 @@ const LikeLink = ({ post, postLikes }) => {
         likePost({ postId: post._id, userId: currentUser }, post)
       );
       setLiked(check);
+      const notification = await dispatch(
+        createNotification({
+          type: "like",
+          notifier: post.userId,
+          typeId: post._id,
+          typeName: subsContent(post.content),
+        })
+      );
+      socket.emit("notify", notification, post.userId);
     } else {
       await dispatch(removeLikeFromPost(liked._id));
       setLiked({});
+      const deletedNot = await notificationService.deleteNotificationBySender(
+        post._id,
+        "like"
+      );
+
+      if (deletedNot) {
+        socket.emit("deletedNot", deletedNot, post.userId);
+      }
     }
   };
 

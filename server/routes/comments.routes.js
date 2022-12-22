@@ -2,6 +2,8 @@ import express from "express";
 import Comment from "../models/Comment.js";
 import CommentLike from "../models/commentLike.js";
 import Post from "../models/Post.js";
+import Notification from "../models/Notification.js";
+import auth from "../middleware/auth.middleware.js";
 const router = express.Router({ mergeParams: true });
 router.post("/", async (req, res) => {
   try {
@@ -27,7 +29,7 @@ router.get("/", async (req, res) => {
     });
   }
 });
-router.delete("/:postId/:commentId", async (req, res) => {
+router.delete("/:postId/:commentId", auth, async (req, res) => {
   try {
     // const { _id } = req.user;
     const { commentId, postId } = req.params;
@@ -43,6 +45,8 @@ router.delete("/:postId/:commentId", async (req, res) => {
     // } else {
     await removedComment.remove();
     await CommentLike.deleteMany({ commentId: commentId });
+    await Comment.deleteMany({ parentId: commentId });
+    await Notification.deleteMany({ typeId: postId, userId: req.user_id });
     res.send(removedComment);
   } catch (error) {
     res.status(500).json({

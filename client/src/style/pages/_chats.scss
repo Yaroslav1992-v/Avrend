@@ -1,0 +1,214 @@
+.chats {
+  &__container {
+    padding: calc(#{$size} * 3) 5px;
+    background-color: $white;
+    position: relative;
+    height: auto;
+  }
+  &__top {
+    position: relative;
+    padding: 0 15px;
+  }
+  &__searchedChats {
+    padding: 10px !important;
+    position: absolute;
+    background-color: $white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.11);
+    left: 20px;
+    right: 20px;
+    &-item {
+      margin-bottom: 10px;
+    }
+    &-img {
+      margin-right: 5px;
+    }
+    &-user {
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+    }
+    &-accName {
+      display: flex;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+  &__box {
+    padding: 20px 30px;
+  }
+  &__item {
+    margin-bottom: 25px;
+  }
+}
+.chatPreview {
+  display: flex;
+  color: $black;
+  padding: 5px;
+  width: 100%;
+  &-unread {
+    background-color: $grey-100;
+    border-radius: 25px;
+  }
+  .chat-bubble {
+    margin-left: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-right-radius: 0;
+  }
+  &__image {
+    margin-right: 10px;
+  }
+  &__box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  &__name {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  &__lastMsg {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: auto;
+    font-size: 12px;
+    &-unread {
+      font-size: 14px;
+      font-weight: 800;
+    }
+  }
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__date {
+    color: #898a8d;
+    font-size: 12px;
+  }
+  &__status {
+    color: $orange;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    p {
+      margin-right: 5px;
+    }
+    &-unread {
+      color: $black;
+      font-weight: 700;
+    }
+  }
+}
+.chat {
+  &__container {
+    background-color: $white;
+    padding: 10px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  &__user {
+    height: 45px;
+    display: flex;
+    &-name {
+      font-weight: 800;
+      font-size: 18px;
+    }
+  }
+  &__messages {
+    padding: 10px 28px !important;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+    &Box {
+      max-width: 255px;
+      margin-bottom: 15px;
+      &-recived {
+        margin-left: auto;
+        .chat__message-date {
+          margin-left: auto;
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+  &__message-content {
+    color: $white;
+    width: fit-content;
+    margin-bottom: 10px;
+    border-radius: 20px 20px 20px 0px;
+    padding: 14px 23px 16px 19px;
+    &-sent {
+      background-color: $orange;
+    }
+    &-recived {
+      background-color: $black-200;
+      transform: rotate(-180deg);
+      p {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  &__message-date {
+    color: $grey-600;
+    font-size: 12px;
+  }
+}
+.message {
+  &__form {
+    padding: 15px;
+  }
+  &__formBox {
+    display: flex;
+    padding: 8px 17px;
+    align-items: center;
+    border-radius: 63px;
+    border: 1px solid $grey;
+  }
+  &__emojis {
+    margin-right: 15px;
+    button {
+      font-size: 28px;
+      color: $grey-100;
+    }
+  }
+  &__textArea {
+    outline-color: transparent;
+    border-color: transparent;
+    padding-top: 10px;
+    resize: none;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+  }
+  &__submit {
+    border-radius: 50%;
+    height: 46px;
+    width: 46px;
+    background-color: $background-100;
+    @include center;
+    color: $white;
+    font-size: 20px;
+    transition: all ease-in 0.5s;
+
+    &:hover {
+      font-size: 22px;
+      padding-left: 5px;
+      background-color: $grey-300;
+    }
+  }
+}

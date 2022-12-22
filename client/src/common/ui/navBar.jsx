@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Menu from "./Menu";
+import NotificatonBox from "./notificatonBox";
 
 const NavBar = ({ title, children, check }) => {
   const [open, setOpen] = useState(true);
@@ -10,7 +11,10 @@ const NavBar = ({ title, children, check }) => {
 
   return (
     <nav className={"navigation" + (check ? " navigation-between" : "")}>
-      <button className="navigation__btn" onClick={toggleMenu}></button>
+      <div className="navigation__left">
+        <button className="navigation__btn" onClick={toggleMenu}></button>{" "}
+        {title !== "Notification" && <NotificatonBox />}
+      </div>
       {title && <h1 className="navigation__title">{title}</h1>}
       {children}
       <Menu check={open} toggleMenu={toggleMenu} />
@@ -25,4 +29,4 @@ NavBar.propTypes = {
   children: PropTypes.node,
   check: PropTypes.bool,
 };
-export default NavBar;
+export default React.memo(NavBar);

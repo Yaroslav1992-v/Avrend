@@ -89,12 +89,14 @@ router.post("/signIn", async (req, res) => {
 router.post("/token", async (req, res) => {
   try {
     const { refresh_token: refreshToken } = req.body;
-    console.log(refreshToken);
     const data = tokenService.validateRefresh(refreshToken);
+
     const dbToken = await tokenService.findToken(refreshToken);
+
     if (!data && !dbToken && data._id !== dbToken?.user?.toString()) {
       return res.status(401).json({ message: "Unauthorized" });
     }
+
     const tokens = await tokenService.generate({
       _id: data._id,
     });

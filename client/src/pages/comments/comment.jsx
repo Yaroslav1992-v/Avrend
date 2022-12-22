@@ -16,14 +16,17 @@ import Loader from "../../common/loader/loader";
 import { updateComment } from "../../store/comments";
 import CommentTop from "./components/commentTop";
 import CommentBottom from "./components/commentBottom";
+import { UseApp } from "../../common/ui/hoc/appLoader";
+import { createNotification } from "../../store/notification";
+import notificationService from "../../services/notification.service";
 const Comment = ({ comment, onReply, comments }) => {
-  console.log("ch");
   const user = useSelector(findUserById(comment.userId));
   const userId = useSelector(getCurrentUserId());
   const likes = useSelector(getLikesById(comment._id));
   const commentsLikesLoaded = useSelector(getCommentLikesLoadingStatus());
   const [commentLike, setCommentLike] = useState({});
   const [edit, setEdit] = useState(false);
+  const { socket } = UseApp();
   const handleEdit = () => {
     setEdit((prevState) => !prevState);
   };
@@ -61,10 +64,22 @@ const Comment = ({ comment, onReply, comments }) => {
   const handleToggleChildren = () => {
     setToggleChildren(true);
   };
+  const commentId = comment.parentId ? comment.parentId : comment.postId;
   const handleLike = async () => {
     if (Object.keys(commentLike).length === 0) {
       const like = { userId: userId, commentId: comment._id };
       const content = await dispatch(likeComment(like, comment));
+      if (comment.userId !== userId) {
+        const notification = await dispatch(
+          createNotification({
+            type: "commentLike",
+            notifier: comment.userId,
+            typeId: commentId,
+            typeName: comment.content,
+          })
+        );
+        socket.emit("notify", notification, comment.userId);
+      }
       if (content) {
         setCommentLike(content);
       }
@@ -73,6 +88,13 @@ const Comment = ({ comment, onReply, comments }) => {
       const check = await dispatch(
         removeLikeFromComment(commentLike._id, { ...comment, likes: likes })
       );
+      const deletedNot = await notificationService.deleteNotificationBySender(
+        commentId,
+        "commentLike"
+      );
+      if (deletedNot) {
+        socket.emit("deletedNot", deletedNot, commentId);
+      }
       if (check) {
         setCommentLike(-1);
       }

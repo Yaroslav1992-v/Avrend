@@ -4,11 +4,6 @@ import { useRef } from "react";
 const CommentField = ({ focus, placeholder, name, onChange, value }) => {
   const textRef = useRef();
   const handleChange = (e) => {
-    const height = e.target.scrollHeight;
-
-    if (height < 60) {
-      e.target.style.height = height + "px";
-    }
     onChange(e);
   };
   if (focus) {

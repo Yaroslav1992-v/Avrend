@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 const Menu = ({ check, toggleMenu }) => {
   const menu = [
     { name: "home", location: "/" },
-    { name: "chats", location: "chats" },
-    { name: "notifications", location: "notifications" },
-    { name: "settings", location: "settings" },
+    { name: "chats", location: "/chats" },
+    { name: "notifications", location: "/notifications" },
+    { name: "settings", location: "/settings" },
   ];
   return (
     <div className={"menu" + (check ? " menu-active" : "")}>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getFullName } from "../../utils/helpers";
 import { getCurrentUser, updateUser } from "../../store/user";
 import { useDispatch, useSelector } from "react-redux";
+
 const UsersInfo = ({ user }) => {
   const fullName = getFullName(user.firstName, user.lastName);
   const currentUser = useSelector(getCurrentUser());

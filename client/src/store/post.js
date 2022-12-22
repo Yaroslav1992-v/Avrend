@@ -79,6 +79,8 @@ export const getPostsByUserId = (array) => (state) => {
   });
   return posts;
 };
+export const getPostByPostId = (id) => (state) =>
+  state.posts.entities.find((post) => post._id === id);
 export const getPostsById = (id) => (state) =>
   state.posts.entities.filter((post) => post.userId === id);
 const { reducer: postReducer, actions } = postSlice;
